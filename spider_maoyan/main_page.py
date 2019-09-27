@@ -1,11 +1,11 @@
 '''
 data : 2018.10.06
 author : 极简XksA
-goal : 爬取猫眼《妖猫传》影评，词云可视化
+goal : 爬取猫眼《悲伤逆流成河》影评，词云可视化
 '''
 
 # 猫眼电影介绍url
-# http://maoyan.com/films/345862
+# http://maoyan.com/films/1217236
 
 import requests,time,random
 # from fake_useragent import UserAgent
@@ -18,7 +18,7 @@ class Spidermaoyan():
 	headers = {
 		    "User-Agent": random.choice(USER_AGENTS),
 		    "Host":"m.maoyan.com",
-		    "Referer":"http://m.maoyan.com/movie/345862/comments?_v_=yes"
+		    "Referer":"http://m.maoyan.com/movie/1217236/comments?_v_=yes"
 		}
 	
 	def __init__(self,url,time):
@@ -57,16 +57,16 @@ class Spidermaoyan():
 	# 存储文件
 	def file_do(self,list_info):
 		# 获取文件大小
-		file_size = os.path.getsize(r'/Users/lizhaoyi/Desktop/妖猫抽出/妖猫.csv')
+		file_size = os.path.getsize(r'G:\maoyan\maoyan.csv')
 		if file_size == 0:
 			# 表头
 			name = ['评论日期', '评论者昵称', '性别', '所在城市','猫眼等级','评分','评论内容']
 			# 建立DataFrame对象
 			file_test = pd.DataFrame(columns=name, data=list_info)
 			# 数据写入
-			file_test.to_csv(r'/Users/lizhaoyi/Desktop/妖猫抽出/妖猫.csv', encoding='utf_8_sig', index=False)
+			file_test.to_csv(r'G:\maoyan\maoyan.csv', encoding='utf_8_sig', index=False)
 		else:
-			with open(r'/Users/lizhaoyi/Desktop/妖猫抽出/妖猫.csv, 'a+',encoding='utf_8_sig', newline='') as file_test:
+			with open(r'G:\maoyan\maoyan.csv', 'a+',encoding='utf_8_sig', newline='') as file_test:
 				# 追加到文件后面
 				writer = csv.writer(file_test)
 				# 写入文件
@@ -100,6 +100,5 @@ def spider_maoyan():
 	
 
 if __name__ == '__main__':
-
 	spider_maoyan()
 	
